@@ -10,7 +10,8 @@
      :source-path      ["index.clj"
                         "assignment/eda.clj"
                         "assignment/scicloj.clj"
-                        "assignment/sklearn.clj"]}))
+                        "assignment/sklearn.clj"
+                        "assignment/conclusion.clj"]}))
 
 (comment
   (build))

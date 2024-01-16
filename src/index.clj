@@ -2,7 +2,8 @@
 
 ;; # CS7200_SP2024_A01_Salvo
 ;
-;The descriptions below reference linear_regression.html found in the LinearRegression folder. The subfolder linear_regression_files is required to see the HTML nicely formatted. So, you can download the LinearRegression folder and open the HTML inside.
+;The descriptions below reference the HTMLs in the `docs/` folder. Please download the `docs/` folder and open any HTML file. All HTMLs are internally linked to one another. The corresponding code (one per chapter) are in `src/assignment/`. In later assignments, I will be able to deploy my Clojure code and have it build to a static HTML site. Unfortunately, I wasn't able to do that this time.
+;
 ;## Summary
 ;
 ;This assignment implemented three popular regularization techniques in regression: ridge, lasso, and elastic net, on a [liver disorder dataset](https://archive.ics.uci.edu/dataset/60/liver+disorders) found on UCI's machine learning repository. The purpose of these regularization techniques is to prevent overfitting in machine learning models, especially in cases with many features. They work by adding a penalty term to the loss function of the model, discouraging the model from assigning too much importance to any one feature. Mathematically, the penalty terms can be written as:
@@ -15,9 +16,7 @@
 ;In this technique, no feature is eliminated. Rather, coefficients "shrink" towards zero.
 ;
 ;### Lasso
-;```math
-;\text{Lasso Penalty} = \text{Loss Function} + \lambda \sum_{i=1}^{p} |\beta_i|
-;```
+;$$\text{Lasso Penalty} = \text{Loss Function} + \lambda \sum_{i=1}^{p} |\beta_i|$$
 ;
 ;Lasso regression also adds a penalty term to the loss function. However, here, it's the absolute value of the  coefficients. Lasso regression is also called "L1 regularization technique." Because of this L1, we may see a lasso regression lambda written as $\lambda_1$.
 ;
@@ -31,38 +30,42 @@
 ;#### Note on $\text{Loss Function}$
 ;In most regression models I've work with, the $\text{Loss Function}$ is the $\text{Residual Sum of Squares}$ ($RSS$).
 ;
-;```math
-;\text{RSS} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-;```
+;$$\text{RSS} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 ;
 ;## Results
 ;
-;Below is a section of a table produced in my linear_regression.html.
+;We were asked to test two implementations of the same algorithm. I ran Java's Smile in scicloj.clj and Python's Scikit Learn in sklearn.clj. Below are the two main tables produced in scicloj.clj and sklearn.clj:
 ;
-;|                   :model-type | :compute-time-ns |     :alpha |   :lambda1 |   :lambda2 |    :adj-r2 |       :mae |      :rmse |
-;|-------------------------------|-----------------:|-----------:|-----------:|-----------:|-----------:|-----------:|-----------:|
-;| :smile.regression/elastic-net |          2082857 | 0.93939394 | 0.93939394 | 0.06060606 | 0.25268445 | 2.13123998 | 2.83213976 |
-;| :smile.regression/elastic-net |          1908943 | 0.94642857 | 0.53535354 | 0.03030303 | 0.25258695 | 2.13083904 | 2.83204344 |
-;|       :smile.regression/ridge |          2079280 | 0.00000000 | 0.00000000 | 0.04000000 | 0.25257129 | 2.13024455 | 2.83164653 |
-;|       :smile.regression/lasso |          1261144 | 1.00000000 | 0.06000000 | 0.00000000 | 0.25256741 | 2.13022717 | 2.83164094 |
-;|       :smile.regression/lasso |          1166866 | 1.00000000 | 0.04000000 | 0.00000000 | 0.25256323 | 2.13022855 | 2.83164707 |
+;|                   :model-type | :compute-time-ns |     :alpha |     :lambda1 |     :lambda2 |    :adj-r2 |       :mae |      :rmse |
+;|-------------------------------|-----------------:|-----------:|-------------:|-------------:|-----------:|-----------:|-----------:|
+;|       :smile.regression/ridge |           691179 | 0.00000000 |   0.00000000 | 196.78714859 | 0.27138367 | 2.19656820 | 2.88244828 |
+;|       :smile.regression/ridge |           644802 | 0.00000000 |   0.00000000 | 192.77108434 | 0.27131830 | 2.19552025 | 2.88102276 |
+;|       :smile.regression/ridge |           843926 | 0.00000000 |   0.00000000 | 188.75502008 | 0.27124938 | 2.19445469 | 2.87959384 |
+;|       :smile.regression/lasso |          1401088 | 1.00000000 |   4.01606426 |   0.00000000 | 0.26141892 | 2.73072125 | 3.40320579 |
+;| :smile.regression/elastic-net |          1581917 | 0.62499984 | 100.00000000 |  60.00004000 | 0.26059398 | 2.22496112 | 2.92246056 |
+;| :smile.regression/elastic-net |          1193860 | 0.65217371 | 100.00000000 |  53.33338000 | 0.26021738 | 2.22204401 | 2.91718016 |
+;|       :smile.regression/lasso |          1240533 | 1.00000000 |   8.03212851 |   0.00000000 | 0.25986847 | 2.73272023 | 3.40683967 |
+;| :smile.regression/elastic-net |          1592694 | 0.68181793 | 100.00000000 |  46.66672000 | 0.25984550 | 2.21890789 | 2.91171010 |
+;|       :smile.regression/lasso |          1372893 | 1.00000000 |  12.04819277 |   0.00000000 | 0.25806319 | 2.73472124 | 3.41060937 |
 ;
-;Keeping in mind that these models are the best of their respective regularization techniques from a selection of 30 models with variable $\lambda$s; most generally, we see that all models perform near identically, especially in terms of Adjusted R$^2$ and errors (MAE and RMSE).
+;|                     :model-type | :compute-time-ns |     :alpha |    :adj-r2 |       :mae |      :rmse |
+;|---------------------------------|-----------------:|-----------:|-----------:|-----------:|-----------:|
+;| :sklearn.regression/elastic-net |          4081852 | 0.98393574 | 0.26161668 | 2.30607905 | 3.04582307 |
+;| :sklearn.regression/elastic-net |          4460882 | 0.98795181 | 0.26159480 | 2.30679512 | 3.04693277 |
+;| :sklearn.regression/elastic-net |          4107027 | 0.99196787 | 0.26157229 | 2.30750974 | 3.04804261 |
+;| :sklearn.regression/elastic-net |          3735449 | 0.99598394 | 0.26154913 | 2.30822291 | 3.04915259 |
+;| :sklearn.regression/elastic-net |          4909871 | 1.00000000 | 0.26152532 | 2.30893464 | 3.05026269 |
 ;
-;When we look at compute time in nanoseconds, we see an advantage in lasso regression. In this subset of the final table in my HTML, we see compute times between ridge and elastic net to be almost equal. On average, though, elastic net models took the longest.
-;
-;As to why elastic net is the slowest, I am not surprised compute time is strictly greater than its constituent parts. As to why lasso regression is faster than ridge regression, I am somewhat confounded. Deductively, we could conclude that computing a square is more computationally heavy than computing an absolute value. Why that is, I do not know.
-;
-;The analogy I use to think about ridge and lasso regression is using scissors to cut around a shape. Ridge is precision getting closer and closer to that line to cut around. Lasso is more haphazard cutting, slicing out a piece inside the line because the result is still shapely, perhaps less perfectly so. Which one is going to finish cutting out the shape first? Probably Miss Lasso.
-;
-;All in all, I enjoy a parsimonious model. As such, if I can use a variable selection technique, I'm for it. This already leads me into preferring lasso. The icing on the cake is the best compute time. Therefore, even though no features were excluded, I prefer lasso.
+; In terms of the goodness-of-fit measures, both implementations perform similarly. The main difference is between compute times. Scikit Learn's implementation takes over twice the time as Smile's.
+
+; Choosing a best model, I'd pick Smile's ridge regression with a lambda of 196.78714859. It has the benefit of fastest computational time and best Adjusted R$^2$. The model coefficients are as follows:
 ;
 ;## Reflection
 ;
 ;I like to believe I understand linear regression at an advanced level. This assignment reminds me how deep simple things can be.
 ;
 ;#### Some depth comes from function implementation.
-;Many, maybe most elastic net functions will take two tuning parameters, alpha and lambda ratio. See Python's ElasticNet implementation [documentation](https://ibex.readthedocs.io/en/latest/api_ibex_sklearn_linear_model_elasticnet.html), for example. I'm migrating from R to Clojure. Many of Clojure's machine learning algorithms use Java's Smile library. Smile's implementation of elastic-net takes in a lambda1 and lambda2. See [documentation](https://haifengl.github.io/api/java/smile/regression/ElasticNet.html). It also doesn't allow you to have either lambda be 0. If you want $lambda1 = 0$, Clojure throws an errors saying, in effect, "Why don't you do a Ridge Regression?" So instead of bundling everything in an elastic net, I had to separate out the three.
+;Many, maybe most elastic net functions will take two tuning parameters, alpha and lambda ratio. See Python's ElasticNet implementation [documentation](https://ibex.readthedocs.io/en/latest/api_ibex_sklearn_linear_model_elasticnet.html), for example. I'm migrating from R to Clojure. Many of Clojure's machine learning algorithms use Java's Smile library. Smile's implementation of elastic-net takes in a lambda1 and lambda2. See [documentation](https://haifengl.github.io/api/java/smile/regression/ElasticNet.html). It also doesn't allow you to have either lambda be 0. If you want $lambda1 = 0$, Clojure throws an errors saying, in effect, "Why don't you do a Ridge Regression?" So instead of bundling everything in an elastic net, I had to separate out the three--ridge, lasso, and elastic net.
 ;
 ;The next question is; How does lambda1 and lambda2 relate to alpha? I couldn't find a direct answer, so instead, I used a hacky ratio found near the bottom of page 4 in [this paper](https://hastie.su.domains/Papers/elasticnet.pdf). Is this hacky alpha the same alpha Python uses? NO! Nevertheless, he persisted.
 ;
@@ -81,5 +84,5 @@
 ;
 ;It's not very easy to add a row, for example. You have to match keys and conjoining vectors. Easier said than done. I think of these data structures having mobility maps, think the Vitruvian Man by Leonardo da Vinci. Man can touch things above, below, behind, in front, all kinds of directions. Think about a dog. Put a treat between its shoulders. It can't reach with its paws, its head can't turn that far; its mobility is limited. When I was working with these datasets, I felt similarly. With time comes comfort.
 ;
-;#### Overall.
-;Overall, I learned a lot and look forward to more.
+;#### Some depth comes from doing things you've never done before.
+;Lastly, I worked hard to get the results published on GitLab pages (or GitHub pages). I set up my project such that I thought I could use a build function I made in `env/dev/src/dev.clj` to build and push the results (the folder `docs/`) to the `gh-pages` branch of a repository. I believe my setup is correct, but figuring out how to use GitHub Actions properly, is where I am still failing. I hope later in the semester I will have this well understood.

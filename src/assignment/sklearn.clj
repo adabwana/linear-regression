@@ -10,7 +10,7 @@
     [scicloj.ml.dataset :as ds]
     [scicloj.ml.metamorph :as mm]
     [scicloj.sklearn-clj.ml]
-    [utils.helpful-extracts :refer [model->ds]]))
+    [utils.helpful-extracts :refer [model->ds evaluate-pipe extract-params]]))
 
 ;; ## Clojure with Scikit Learn Algorithm
 
@@ -96,3 +96,24 @@
 (-> (model->ds models-sklearn-vals 5)
     (ds/reorder-columns col-order)
     (ds/order-by :adj-r2 :desc))
+
+;; ## Build final models for evaluation
+(def eval-sklearn
+  (evaluate-pipe
+    (->> (extract-params models-sklearn-vals 5)                ;use best 3 alphas
+         (map sklearn-pipe-fn))
+    ds-split))
+
+(def models-sklearn
+  (->> (best-models eval-sklearn)
+       reverse))
+
+(def top-sklearn
+  (-> (model->ds models-sklearn 5)
+      (ds/reorder-columns col-order)
+      (ds/order-by :adj-r2 :desc)
+      (ds/drop-columns :predict-proba?)))
+
+top-sklearn
+
+

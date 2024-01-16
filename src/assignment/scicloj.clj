@@ -122,20 +122,23 @@
 ^{::clerk/viewer clerk/code}
 (-> models-enet-val first :summary)
 
+; The summary for our best lasso model looks wrong. A negative Adjusted R$2$? We can see an issue derives from not calculating the Adjusted R$^2$, i.e the `:metric`.
+
+(-> models-lasso-val first :metric)
+
+; Instead, we will collect the best lasso models according to the lowest `mae`, i.e. `:other-metric-1`.
 
 (def models-lasso-val-2
   (->> (best-models eval-lasso-val)
-      (sort-by :other-metric-2)))
+       (sort-by :other-metric-1)))
 
 (-> models-lasso-val-2 first :summary)
-(-> models-lasso-val-2 first :params)
-
 
 ;; ### Build final models for evaluation
 ;; #### Ridge
 (def eval-ridge
   (evaluate-pipe
-    (->> (extract-params models-ridge-val 3)
+    (->> (extract-params models-ridge-val 3)                ;use best 3 lambdas
          (map ridge-pipe-fn))
     ds-split))
 
@@ -146,7 +149,7 @@
 ;; #### Lasso
 (def eval-lasso
   (evaluate-pipe
-    (->> (extract-params models-lasso-val-2 3)
+    (->> (extract-params models-lasso-val-2 3)              ;use best 3 lambdas
          (map lasso-pipe-fn))
     ds-split))
 
@@ -157,7 +160,7 @@
 ;;#### Elastic net
 (def eval-enet
   (evaluate-pipe
-    (->> (extract-params models-enet-val 5)
+    (->> (extract-params models-enet-val 3)                 ;use best 3 lambda1s and lambda2s
          (map elastic-net-pipe-fn))
     ds-split))
 
@@ -165,7 +168,7 @@
   (-> (best-models eval-enet)
       reverse))
 
-;; ### Evaluate
+;; ## Build final models for evaluation
 (def ds-ridge
   (-> (model->ds models-ridge 3)
       (ds/rename-columns {:lambda :lambda2})
@@ -177,7 +180,7 @@
       (ds/add-columns {:lambda2 0 :alpha 1})))
 
 (def ds-elastic
-  (-> (model->ds models-enet 5)
+  (-> (model->ds models-enet 3)
       (ds/add-columns {:alpha (fn [ds]
                                 (dfn// (:lambda1 ds) (dfn/+ (:lambda1 ds) (:lambda2 ds))))})))
 
@@ -185,32 +188,18 @@
   [:model-type :compute-time-ns :alpha :lambda1 :lambda2 :adj-r2 :mae :rmse])
 
 ;; ### Final comparisons
-;; #### Ordered by alphas
-(-> (model->ds (concat (ds/rows ds-ridge :as-maps) (ds/rows ds-lasso :as-maps) (ds/rows ds-elastic :as-maps)))
-    (ds/reorder-columns col-order)
-    (ds/order-by :alpha))
+(def top-scicloj
+  (-> (model->ds (concat (ds/rows ds-ridge :as-maps) (ds/rows ds-lasso :as-maps) (ds/rows ds-elastic :as-maps)))
+      (ds/reorder-columns col-order)
+      (ds/order-by :adj-r2 :desc)))
 
-;; #### Ordered by Adjusted R$^2$
-(-> (model->ds (concat (ds/rows ds-ridge :as-maps) (ds/rows ds-lasso :as-maps) (ds/rows ds-elastic :as-maps)))
-    (ds/reorder-columns col-order)
-    (ds/order-by :adj-r2 :desc))
+top-scicloj
 
-((-> models-ridge first :pipe-fn)
- (merge (-> models-ridge first :fit-ctx)
-        {:metamorph/data (ds/tail (:test (second ds-split)))
-         :metamorph/mode :transform}))
+(comment
+  ((-> models-ridge first :pipe-fn)
+   (merge (-> models-ridge first :fit-ctx)
+          {:metamorph/data (ds/tail (:test (second ds-split)))
+           :metamorph/mode :transform})))
 
-;; ### Plots of ridge and lasso coefficients vs lambdas
-(-> (coefs-vs-lambda liver-disease ridge-pipe-fn)
-    (hanami/plot ht/line-chart
-                 {:X     "log-lambda" :XSCALE {:zero false}
-                  :Y     "coefficient" :YSCALE {:zero false}
-                  :COLOR "predictor" :TITLE "Ridge"}))
-
-(-> (coefs-vs-lambda liver-disease lasso-pipe-fn)
-    (hanami/plot ht/line-chart
-                 {:X     "log-lambda" :XSCALE {:zero false}
-                  :Y     "coefficient" :YSCALE {:zero false}
-                  :COLOR "predictor" :TITLE "Lasso"}))
 
 ; Note how regressor coefficients for lasso models may go to 0, whereas in a ridge model, regressor coefficients will only ever *approach* 0 while never reaching.

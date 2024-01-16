@@ -98,3 +98,18 @@
             (-> model-instance .coefficients seq)
             predictors)))
       (range 1 100000 100))))
+
+(comment
+
+  ;; ### Plots of ridge and lasso coefficients vs lambdas
+  (-> (coefs-vs-lambda liver-disease ridge-pipe-fn)
+      (hanami/plot ht/line-chart
+                   {:X     "log-lambda" :XSCALE {:zero false}
+                    :Y     "coefficient" :YSCALE {:zero false}
+                    :COLOR "predictor" :TITLE "Ridge"}))
+
+  (-> (coefs-vs-lambda liver-disease lasso-pipe-fn)
+      (hanami/plot ht/line-chart
+                   {:X     "log-lambda" :XSCALE {:zero false}
+                    :Y     "coefficient" :YSCALE {:zero false}
+                    :COLOR "predictor" :TITLE "Lasso"})))
