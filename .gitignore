@@ -1,8 +1,9 @@
 .clerk
-.cpcache
-.idea
+.cpcache/
+.idea/
 .nrepl-port
 *.iml
 classes/
 docs/
 notebooks/
+src/assignment/interop.clj

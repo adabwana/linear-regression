@@ -8,7 +8,7 @@
      :base-source-path "src"
      :base-target-path "docs"
      :subdirs-to-sync  ["notebooks" "data"]
-     :source-path      ["index.clj"
+     :source-path      ["index.md" ;index.clj
                         "assignment/eda.clj"
                         "assignment/scicloj.clj"
                         "assignment/sklearn.clj"
