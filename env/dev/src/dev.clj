@@ -6,6 +6,7 @@
     {:format           [:quarto :html]
      :book             {:title "Linear Regression"}
      :base-source-path "src"
+     :base-target-path "docs"
      :subdirs-to-sync  ["notebooks" "data"]
      :source-path      ["index.clj"
                         "assignment/eda.clj"
