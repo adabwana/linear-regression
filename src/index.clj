@@ -8,10 +8,10 @@
 ;* Scale, normalize, and/or encode your data appropriately.
 ;* Implement the Multivariate Linear Regression.
 ;* Compare the performance of your implementation in terms of computation time and other appropriate metrics using 5-fold Cross Validation.
-;* Modify the "README.md" file to  include the following sections:
-;  * Summary: A one paragraph summary of the algorithm that was implemented including any pertinent or useful information. If mathematics are appropriate, include those as well.
-;  * Results: Display the comparative analysis of your implementation and the benchmark implementation in terms of computation time and other metrics. Which algorithm performed better? Why do you think this is the case?
-;  * Reflection: One paragraph describing useful takeaways from the week, things that surprised you, or things that caused you inordinate difficulty.
+;* Modify the "README.md" file to include the following sections:
+;    * Summary: A one-paragraph summary of the algorithm that was implemented including any pertinent or useful information. If mathematics are appropriate, include those as well.
+;    * Results: Display the comparative analysis of your implementation and the benchmark implementation in terms of computation time and other metrics. Which algorithm performed better? Why do you think this is the case?
+;    * Reflection: One paragraph describing useful takeaways from the week, things that surprised you, or things that caused you inordinate difficulty.
 ;* Make sure that your README file is formatted properly and is visually appealing. It should be free of grammatical errors, punctuation errors, capitalization issues, etc.
 ;
 ;What I did:
