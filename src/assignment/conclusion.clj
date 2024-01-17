@@ -1,14 +1,13 @@
 (ns assignment.conclusion
   (:require
-    [assignment.scicloj :refer [top-scicloj models-ridge]]
-    [assignment.sklearn :refer [top-sklearn]]
-    [scicloj.ml.dataset :as ds]))
+    [assignment.scicloj :refer [models-ridge top-scicloj]]
+    [assignment.sklearn :refer [top-sklearn]]))
 
 ;; ## Conclusion
 
-; For this assignment we had to create a linear regression model and compare it against another implementation of that model. For our comparisons we needed computation time to build each model along with a few other regression goodness-of-fit measures, either of the model (AIC, BIC, Mallows C$_p$, Adjusted R$^2$) or of the errors (RMSE, MAE, MAD).<br/><br/>
+; For this assignment, we had to create a linear regression model and compare it against another implementation of that model. For our comparisons, we needed computation time to build each model along with a few other regression goodness-of-fit measures, either of the model (AIC, BIC, Mallows C$_p$, Adjusted R$^2$) or of the errors (RMSE, MAE, MAD).<br/><br/>
 
-;; ### ML Process
+;; ## ML Process
 ; The process involved hyperparameter tuning for elastic net models built using Scikit Learn and Smile algorithms. The Machine learning process involved:<br/><br/>
 
 ; 1) Partitioning the data into training, validation, and testing.<br/>
@@ -23,8 +22,8 @@ top-sklearn
 (double (/ (apply min (:compute-time-ns top-sklearn))
            (apply max (:compute-time-ns top-scicloj))))
 
-;; ### Final Remarks
-; In terms of the goodness-of-fit, both implementations perform similarly. The main difference is between compute times. Scikit Learn's implementation takes over twice the time as Smile's.
+;; ## Final Remarks
+; In terms of the goodness-of-fit, both implementations perform similarly. The main difference is between compute times. Scikit Learn's implementation takes 1.5 to 2.5 times longer than Smile's (multiple runs).
 
 ; Choosing a best model, I'd pick Smile's ridge regression with a lambda of 196.78714859. It has the benefit of fastest computational time and best Adjusted R$^2$. The model coefficients are as follows:
 

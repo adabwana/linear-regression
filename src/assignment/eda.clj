@@ -3,20 +3,11 @@
     [aerial.hanami.templates :as ht]
     [clojure.math.combinatorics :as combo]
     [fastmath.stats :as stats]
-    [nextjournal.clerk :as clerk]
-    [scicloj.clay.v2.api :as clay]
     [scicloj.kindly.v4.kind :as kind]
     [scicloj.ml.dataset :as ds]
     [scicloj.noj.v1.vis.hanami :as hanami]))
 
 ;; ## Exploratory Data Analysis
-
-;; Run clerk functions in comment to evaluate namespace in browser interactively
-(comment
-  (clerk/serve! {:browse? true :watch-paths ["."]})
-  (clerk/show! "src/assignment/eda.clj")
-  (clay/start!))
-
 ;; Load data
 (defonce liver-disease
          (ds/dataset "data/bupa.csv"

@@ -1,25 +1,16 @@
 (ns assignment.scicloj
   (:require
-    [aerial.hanami.templates :as ht]
     [assignment.eda :refer [liver-disease]]
-    [calc-metric.patch]
+    [calc-metric.patch] ;eval from milliseconds to nanoseconds
     [nextjournal.clerk :as clerk]
-    [scicloj.clay.v2.api :as clay]
     [scicloj.ml.core :as ml]
     [scicloj.ml.dataset :as ds]
     [scicloj.ml.metamorph :as mm]
-    [scicloj.noj.v1.vis.hanami :as hanami]
     [tech.v3.datatype.functional :as dfn]
-    [utils.helpful-extracts :refer :all]))
+    [utils.helpful-extracts
+     :refer [best-models evaluate-pipe extract-params model->ds]]))
 
 ;; ## Clojure with Smile Algorithm
-
-;; Run clerk functions in comment to evaluate namespace in browser interactively
-(comment
-  (clerk/serve! {:browse? true :watch-paths ["."]})
-  (clerk/show! "src/assignment/linear_regression.clj")
-  (clay/start!))
-
 ;; Define regressors and response
 (def response :drinks)
 (def regressors
@@ -101,7 +92,7 @@
 (def eval-enet-val
   (evaluate-pipe elastic-pipelines train-val-splits))
 
-;; ### Extract models
+;; ## Extract models
 (def models-ridge-val
   (-> (best-models eval-ridge-val)
       reverse))
@@ -134,8 +125,8 @@
 
 (-> models-lasso-val-2 first :summary)
 
-;; ### Build final models for evaluation
-;; #### Ridge
+;; ## Build final models for evaluation
+;; ### Ridge
 (def eval-ridge
   (evaluate-pipe
     (->> (extract-params models-ridge-val 3)                ;use best 3 lambdas
@@ -146,7 +137,7 @@
   (->> (best-models eval-ridge)
        reverse))
 
-;; #### Lasso
+;; ### Lasso
 (def eval-lasso
   (evaluate-pipe
     (->> (extract-params models-lasso-val-2 3)              ;use best 3 lambdas
@@ -157,7 +148,7 @@
   (->> (best-models eval-lasso)
        reverse))
 
-;;#### Elastic net
+;; ### Elastic net
 (def eval-enet
   (evaluate-pipe
     (->> (extract-params models-enet-val 3)                 ;use best 3 lambda1s and lambda2s
@@ -187,7 +178,7 @@
 (def col-order
   [:model-type :compute-time-ns :alpha :lambda1 :lambda2 :adj-r2 :mae :rmse])
 
-;; ### Final comparisons
+;; ## Final comparisons
 (def top-scicloj
   (-> (model->ds (concat (ds/rows ds-ridge :as-maps) (ds/rows ds-lasso :as-maps) (ds/rows ds-elastic :as-maps)))
       (ds/reorder-columns col-order)
@@ -200,6 +191,3 @@ top-scicloj
    (merge (-> models-ridge first :fit-ctx)
           {:metamorph/data (ds/tail (:test (second ds-split)))
            :metamorph/mode :transform})))
-
-
-; Note how regressor coefficients for lasso models may go to 0, whereas in a ridge model, regressor coefficients will only ever *approach* 0 while never reaching.

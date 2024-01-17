@@ -2,24 +2,16 @@
   (:require
     [assignment.eda :refer [liver-disease]]
     [assignment.scicloj :refer [col-order]]
-    [calc-metric.patch]
+    [calc-metric.patch] ;eval from milliseconds to nanoseconds
     [fastmath.stats :as stats]
-    [nextjournal.clerk :as clerk]
-    [scicloj.clay.v2.api :as clay]
     [scicloj.ml.core :as ml]
     [scicloj.ml.dataset :as ds]
     [scicloj.ml.metamorph :as mm]
     [scicloj.sklearn-clj.ml]
-    [utils.helpful-extracts :refer [model->ds evaluate-pipe extract-params]]))
+    [utils.helpful-extracts
+     :refer [best-models evaluate-pipe extract-params model->ds]]))
 
 ;; ## Clojure with Scikit Learn Algorithm
-
-;; Run clerk functions in comment to evaluate namespace in browser interactively
-(comment
-  (clerk/serve! {:browse? true :watch-paths ["."]})
-  (clerk/show! "src/assignment/linear_regression.clj")
-  (clay/start!))
-
 ; Define regressor and response
 (def response :drinks)
 (def regressors
@@ -51,6 +43,7 @@
     (:train (first ds-split))
     :kfold {:seed 123 :k 5}))
 
+;; ## Evaluate pipelines
 (def sklearn-pipelines
   (->>
     (ml/sobol-gridsearch {:alpha (ml/linear 0 1 250)})      ;doesnt like l1-ratio, why??
@@ -67,20 +60,7 @@
      :return-best-pipeline-only        false
      :return-best-crossvalidation-only true}))
 
-;; ### Extract models
-(defn best-models [eval]
-  (->> eval
-       flatten
-       (map
-         #(hash-map :summary (ml/thaw-model (get-in % [:fit-ctx :model]))
-                    :fit-ctx (:fit-ctx %)
-                    :timing-fit (:timing-fit %)
-                    :metric ((comp :metric :test-transform) %)
-                    :other-metrices ((comp :other-metrices :test-transform) %)
-                    :params ((comp :options :model :fit-ctx) %)
-                    :pipe-fn (:pipe-fn %)))
-       (sort-by :metric)))
-
+;; ## Extract models
 (def models-sklearn-vals
   (->> (best-models evaluations-sklearn)
        reverse))
@@ -100,7 +80,7 @@
 ;; ## Build final models for evaluation
 (def eval-sklearn
   (evaluate-pipe
-    (->> (extract-params models-sklearn-vals 5)                ;use best 3 alphas
+    (->> (extract-params models-sklearn-vals 5)             ;use best 3 alphas
          (map sklearn-pipe-fn))
     ds-split))
 
@@ -115,5 +95,3 @@
       (ds/drop-columns :predict-proba?)))
 
 top-sklearn
-
-
