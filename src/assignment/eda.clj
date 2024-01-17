@@ -13,31 +13,31 @@
          (ds/dataset "data/bupa.csv"
                      {:key-fn (fn [colname]
                                 (-> colname
-                                    (clojure.string/replace #"\.|\s" "-")
+                                    (clojure.string/replace ##"\.|\s" "-")
                                     clojure.string/lower-case
                                     keyword))}))
 
-;; # Tables and nature of data
+;; ## Tables and nature of data
 ; First seven of data
 (ds/head liver-disease 7)
 ; Descriptive statistics of columns
 (ds/info liver-disease)
 
-;; ## What is column :selector?
+;; ### What is column :selector?
 (set (:selector liver-disease))
 
 ; `:selector` takes two value only, 0 and 1. Let's see descriptive statistics of each group.
 
-(ds/info (tech.v3.dataset/filter liver-disease #(= (:selector %) 1)))
-(ds/info (tech.v3.dataset/filter liver-disease #(= (:selector %) 2)))
+(ds/info (tech.v3.dataset/filter liver-disease ##(= (:selector %) 1)))
+(ds/info (tech.v3.dataset/filter liver-disease ##(= (:selector %) 2)))
 
 ; The data looks similar in terms of summary statistics per column in either selector equals 1 or 2, above. Three columns I am focusing on are, mean, standard deviation, and skew. Mean, standard deviation, and skew are similar for both groups in `:mcv` and `:alkphos`. The other four columns deviate in some way from the other `:selector` groups in either mean, standard deviation, and/or skew.
 
-;; # Plots
+;; ## Plots
 (def cols-of-interest
   (remove #{:selector} (ds/column-names liver-disease)))
 
-;; ## Linearity with response and histogram of regressor.
+;; ### Linearity with response and histogram of regressor.
 ^kind/vega
 (let [dataset liver-disease
       make-plot (fn [field]
@@ -61,7 +61,7 @@
                                       {:HEIGHT 125 :WIDTH 175
                                        :X      field :YAGG :count})]))))
 
-;; ## Pairs-plots.
+;; ### Pairs-plots.
 ^kind/vega
 (let [data (ds/rows liver-disease :as-maps)
       column-names cols-of-interest]
@@ -95,7 +95,7 @@
 
   (stats/correlation-matrix (ds/columns liver-disease) :spearman))
 
-;; ## Box-plots.
+;; ### Box-plots.
 ^kind/vega
 (let [data (ds/rows liver-disease :as-maps)
       column-names (remove #{:selector} (ds/column-names liver-disease))]

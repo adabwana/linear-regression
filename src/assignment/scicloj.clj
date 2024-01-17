@@ -15,7 +15,7 @@
 (def regressors
   (remove #{response} (ds/column-names liver-disease)))
 
-;; # Build pipelines
+;; ## Build pipelines
 (def pipeline-fn
   (ml/pipeline
     (mm/remove-column :selector)
@@ -45,7 +45,7 @@
     (mm/model (merge {:model-type :smile.regression/elastic-net}
                      params))))
 
-;; # Partition data
+;; ## Partition data
 (def ds-split
   (ds/split->seq
     liver-disease
@@ -56,8 +56,8 @@
     (:train (first ds-split))
     :kfold {:seed 123 :k 5}))
 
-;; # Build models
-;; ## Ridge
+;; ## Build models
+;; ### Ridge
 (def ridge-pipelines
   (->> (ml/sobol-gridsearch {:lambda (ml/linear 0 1000 250)})
        (map ridge-pipe-fn)))
@@ -65,7 +65,7 @@
 (def eval-ridge-val
   (evaluate-pipe ridge-pipelines train-val-splits))
 
-;; ## Lasso
+;; ### Lasso
 (def lasso-pipelines
   (->> (ml/sobol-gridsearch {:lambda (ml/linear 0 1000 250)})
        (map lasso-pipe-fn)))
@@ -73,7 +73,7 @@
 (def eval-lasso-val
   (evaluate-pipe lasso-pipelines train-val-splits))
 
-;; ## Elastic Net
+;; ### Elastic Net
 (def elastic-pipelines
   (->> (ml/sobol-gridsearch {:lambda1 (ml/linear 0.0001 100 16)
                              :lambda2 (ml/linear 0.0001 100 16)})
@@ -91,7 +91,7 @@
 (def eval-enet-val
   (evaluate-pipe elastic-pipelines train-val-splits))
 
-;; # Extract models
+;; ## Extract models
 (def models-ridge-val
   (-> (best-models eval-ridge-val)
       reverse))
@@ -104,7 +104,7 @@
   (-> (best-models eval-enet-val)
       reverse))
 
-;; ## Best model for each pipeline
+;; ### Best model for each pipeline
 (-> models-ridge-val first :summary)
 (-> models-lasso-val first :summary)
 (-> models-enet-val first :summary)
@@ -121,8 +121,8 @@
 
 (-> models-lasso-val-2 first :summary)
 
-;; # Build final models for evaluation
-;; ## Ridge
+;; ## Build final models for evaluation
+;; ### Ridge
 (def eval-ridge
   (evaluate-pipe
     (->> (extract-params models-ridge-val 3)                ;use best 3 lambdas
@@ -133,7 +133,7 @@
   (->> (best-models eval-ridge)
        reverse))
 
-;; ## Lasso
+;; ### Lasso
 (def eval-lasso
   (evaluate-pipe
     (->> (extract-params models-lasso-val-2 3)              ;use best 3 lambdas
@@ -144,7 +144,7 @@
   (->> (best-models eval-lasso)
        reverse))
 
-;; ## Elastic net
+;; ### Elastic net
 (def eval-enet
   (evaluate-pipe
     (->> (extract-params models-enet-val 3)                 ;use best 3 lambda1s and lambda2s
@@ -155,7 +155,7 @@
   (-> (best-models eval-enet)
       reverse))
 
-;; # Build final models for evaluation
+;; ## Build final models for evaluation
 (def ds-ridge
   (-> (model->ds models-ridge 3)
       (ds/rename-columns {:lambda :lambda2})
@@ -174,7 +174,7 @@
 (def col-order
   [:model-type :compute-time-ns :alpha :lambda1 :lambda2 :adj-r2 :mae :rmse])
 
-;; # Final comparisons
+;; ## Final comparisons
 (def top-scicloj
   (-> (model->ds (concat (ds/rows ds-ridge :as-maps) (ds/rows ds-lasso :as-maps) (ds/rows ds-elastic :as-maps)))
       (ds/reorder-columns col-order)
