@@ -15,7 +15,7 @@
 ; Define regressor and response
 (def response :drinks)
 (def regressors
-  (remove ##(= response %) (ds/column-names liver-disease)))
+  (remove #(= response %) (ds/column-names liver-disease)))
 
 ;; ## Build pipelines
 (def pipeline-fn

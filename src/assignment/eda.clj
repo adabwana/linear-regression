@@ -28,8 +28,8 @@
 
 ; `:selector` takes two value only, 0 and 1. Let's see descriptive statistics of each group.
 
-(ds/info (tech.v3.dataset/filter liver-disease ##(= (:selector %) 1)))
-(ds/info (tech.v3.dataset/filter liver-disease ##(= (:selector %) 2)))
+(ds/info (tech.v3.dataset/filter liver-disease #(= (:selector %) 1)))
+(ds/info (tech.v3.dataset/filter liver-disease #(= (:selector %) 2)))
 
 ; The data looks similar in terms of summary statistics per column in either selector equals 1 or 2, above. Three columns I am focusing on are, mean, standard deviation, and skew. Mean, standard deviation, and skew are similar for both groups in `:mcv` and `:alkphos`. The other four columns deviate in some way from the other `:selector` groups in either mean, standard deviation, and/or skew.
 
