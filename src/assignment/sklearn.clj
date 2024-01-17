@@ -11,13 +11,13 @@
     [utils.helpful-extracts
      :refer [best-models evaluate-pipe extract-params model->ds]]))
 
-;; ## Clojure with Scikit Learn Algorithm
+;; # Clojure with Scikit Learn Algorithm
 ; Define regressor and response
 (def response :drinks)
 (def regressors
   (remove #(= response %) (ds/column-names liver-disease)))
 
-;; ## Build pipelines
+;; # Build pipelines
 (def pipeline-fn
   (ml/pipeline
     (mm/remove-column :selector)
@@ -34,7 +34,7 @@
                       :predict-proba? false}
                      params))))
 
-;; ## Partition data
+;; # Partition data
 (def ds-split                                               ;:split-names [:train-val :test]
   (ds/split->seq liver-disease :kfold {:seed 123 :k 5 :ratio [0.8 0.2]}))
 
@@ -43,7 +43,7 @@
     (:train (first ds-split))
     :kfold {:seed 123 :k 5}))
 
-;; ## Evaluate pipelines
+;; # Evaluate pipelines
 (def sklearn-pipelines
   (->>
     (ml/sobol-gridsearch {:alpha (ml/linear 0 1 250)})      ;doesnt like l1-ratio, why??
@@ -60,7 +60,7 @@
      :return-best-pipeline-only        false
      :return-best-crossvalidation-only true}))
 
-;; ## Extract models
+;; # Extract models
 (def models-sklearn-vals
   (->> (best-models evaluations-sklearn)
        reverse))
@@ -77,7 +77,7 @@
     (ds/reorder-columns col-order)
     (ds/order-by :adj-r2 :desc))
 
-;; ## Build final models for evaluation
+;; # Build final models for evaluation
 (def eval-sklearn
   (evaluate-pipe
     (->> (extract-params models-sklearn-vals 5)             ;use best 3 alphas
