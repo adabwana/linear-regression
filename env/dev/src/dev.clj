@@ -14,7 +14,6 @@
                         "assignment/sklearn.clj"
                         "assignment/conclusion.clj"]}))
 
-
 (comment
   ;with index.md clay wont find in src and complains about docs/_book
   (build))
