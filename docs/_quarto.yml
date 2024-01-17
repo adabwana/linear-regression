@@ -1,0 +1,6 @@
+format:
+  html: {toc: true, toc-depth: 4}
+project: {type: book}
+book:
+  title: Linear Regression
+  chapters: [index.qmd, assignment.eda.qmd, assignment.scicloj.qmd, assignment.sklearn.qmd, assignment.conclusion.qmd]
