@@ -137,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CS7200_SP2024_A01_Salvo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Assignment 1: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -224,34 +224,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    [aerial.hanami.templates <span class="at">:as</span> ht]</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    [clojure.math.combinatorics <span class="at">:as</span> combo]</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    [fastmath.stats <span class="at">:as</span> stats]</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    [nextjournal.clerk <span class="at">:as</span> clerk]</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    [scicloj.clay.v2.api <span class="at">:as</span> clay]</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    [scicloj.kindly.v4.kind <span class="at">:as</span> kind]</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    [scicloj.ml.dataset <span class="at">:as</span> ds]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    [scicloj.noj.v1.vis.hanami <span class="at">:as</span> hanami]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Run clerk functions in comment to evaluate namespace in browser interactively</p>
-<div class="sourceClojure">
-<div class="sourceCode" id="cb2"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  (clerk/serve! {<span class="at">:browse</span>? <span class="va">true</span> <span class="at">:watch-paths</span> [<span class="st">"."</span>]})</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  (clerk/show! <span class="st">"src/assignment/eda.clj"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (clay/start!))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    [scicloj.kindly.v4.kind <span class="at">:as</span> kind]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    [scicloj.ml.dataset <span class="at">:as</span> ds]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    [scicloj.noj.v1.vis.hanami <span class="at">:as</span> hanami]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Load data</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb3"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defonce</span><span class="fu"> liver-disease</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>         (ds/dataset <span class="st">"data/bupa.csv"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                     {<span class="at">:key-fn</span> (<span class="kw">fn</span> [colname]</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                (<span class="kw">-&gt;</span> colname</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                    (clojure.string/replace <span class="ss">#"\.|\s"</span> <span class="st">"-"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                    clojure.string/lower-case</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="kw">keyword</span>))}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">defonce</span><span class="fu"> liver-disease</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>         (ds/dataset <span class="st">"data/bupa.csv"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                     {<span class="at">:key-fn</span> (<span class="kw">fn</span> [colname]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                (<span class="kw">-&gt;</span> colname</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                    (clojure.string/replace <span class="ss">#"\.|\s"</span> <span class="st">"-"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                    clojure.string/lower-case</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="kw">keyword</span>))}))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="tables-and-nature-of-data" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="tables-and-nature-of-data"><span class="header-section-number">2.1</span> Tables and nature of data</h2>
 <p>First seven of data</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb4"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ds/head liver-disease <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>(ds/head liver-disease <span class="dv">7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>data/bupa.csv [7 7]:</p>
 <table class="table">
@@ -334,7 +325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>Descriptive statistics of columns</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb5"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(ds/info liver-disease)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>(ds/info liver-disease)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>data/bupa.csv: descriptive-stats [7 11]:</p>
 <table class="table">
@@ -463,14 +454,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="what-is-column-selector" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="what-is-column-selector"><span class="header-section-number">2.1.1</span> What is column :selector?</h3>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">set</span> (<span class="at">:selector</span> liver-disease))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">set</span> (<span class="at">:selector</span> liver-disease))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
-<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>#{<span class="dv">1</span> <span class="dv">2</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>#{<span class="dv">1</span> <span class="dv">2</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>:selector</code> takes two value only, 0 and 1. Let’s see descriptive statistics of each group.</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(ds/info (tech.v3.dataset/filter liver-disease #(<span class="kw">=</span> (<span class="at">:selector</span> <span class="va">%</span>) <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(ds/info (tech.v3.dataset/filter liver-disease #(<span class="kw">=</span> (<span class="at">:selector</span> <span class="va">%</span>) <span class="dv">1</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>data/bupa.csv: descriptive-stats [7 11]:</p>
 <table class="table">
@@ -597,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb9"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(ds/info (tech.v3.dataset/filter liver-disease #(<span class="kw">=</span> (<span class="at">:selector</span> <span class="va">%</span>) <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>(ds/info (tech.v3.dataset/filter liver-disease #(<span class="kw">=</span> (<span class="at">:selector</span> <span class="va">%</span>) <span class="dv">2</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>data/bupa.csv: descriptive-stats [7 11]:</p>
 <table class="table">
@@ -729,22 +720,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="plots" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="plots"><span class="header-section-number">2.2</span> Plots</h2>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb10"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> cols-of-interest</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">remove</span> #{<span class="at">:selector</span>} (ds/column-names liver-disease)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(<span class="bu">def</span><span class="fu"> cols-of-interest</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">remove</span> #{<span class="at">:selector</span>} (ds/column-names liver-disease)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="linearity-with-response-and-histogram-of-regressor." class="level3" data-number="2.2.1">
 <h3 data-number="2.2.1" class="anchored" data-anchor-id="linearity-with-response-and-histogram-of-regressor."><span class="header-section-number">2.2.1</span> Linearity with response and histogram of regressor.</h3>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb11"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [dataset liver-disease</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>      make-plot (<span class="kw">fn</span> [field]</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                  (<span class="kw">-&gt;</span> dataset</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                      (hanami/vconcat {}                    <span class="co">;can switch to hconcat</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                      [(hanami/plot dataset ht/point-chart</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                                    {<span class="at">:X</span> field <span class="at">:XSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">:Y</span> <span class="at">:drinks</span> <span class="at">:YSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}})</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                       (hanami/histogram dataset field {<span class="at">:nbins</span> <span class="dv">20</span>})])))]</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;&gt;</span> (<span class="kw">map</span> make-plot cols-of-interest) (hanami/hconcat {} {})))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [dataset liver-disease</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>      make-plot (<span class="kw">fn</span> [field]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                  (<span class="kw">-&gt;</span> dataset</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                      (hanami/vconcat {}                    <span class="co">;can switch to hconcat</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                      [(hanami/plot dataset ht/point-chart</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                                    {<span class="at">:X</span> field <span class="at">:XSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                                     <span class="at">:Y</span> <span class="at">:drinks</span> <span class="at">:YSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}})</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                       (hanami/histogram dataset field {<span class="at">:nbins</span> <span class="dv">20</span>})])))]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">-&gt;&gt;</span> (<span class="kw">map</span> make-plot cols-of-interest) (hanami/hconcat {} {})))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="max-height:600px;overflow-y:auto;">
 <div>
@@ -752,32 +743,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb12"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span>                                                    <span class="co">;make plot alternative were I can change height and width but not nbins</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [dataset liver-disease]</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">-&gt;</span> dataset</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        (hanami/hconcat {}</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                        [(hanami/plot dataset ht/point-chart</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                      {<span class="at">:HEIGHT</span> <span class="dv">125</span> <span class="at">:WIDTH</span> <span class="dv">175</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:X</span>      <span class="at">:mcv</span> <span class="at">:XSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:Y</span>      <span class="at">:drinks</span> <span class="at">:YSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}})</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                         (hanami/plot dataset ht/bar-chart</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                                      {<span class="at">:HEIGHT</span> <span class="dv">125</span> <span class="at">:WIDTH</span> <span class="dv">175</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:X</span>      field <span class="at">:YAGG</span> <span class="at">:count</span>})]))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span>                                                    <span class="co">;make plot alternative were I can change height and width but not nbins</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [dataset liver-disease]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">-&gt;</span> dataset</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        (hanami/hconcat {}</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                        [(hanami/plot dataset ht/point-chart</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                      {<span class="at">:HEIGHT</span> <span class="dv">125</span> <span class="at">:WIDTH</span> <span class="dv">175</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:X</span>      <span class="at">:mcv</span> <span class="at">:XSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:Y</span>      <span class="at">:drinks</span> <span class="at">:YSCALE</span> {<span class="at">:zero</span> <span class="va">false</span>}})</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                         (hanami/plot dataset ht/bar-chart</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                      {<span class="at">:HEIGHT</span> <span class="dv">125</span> <span class="at">:WIDTH</span> <span class="dv">175</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">:X</span>      field <span class="at">:YAGG</span> <span class="at">:count</span>})]))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="pairs-plots." class="level3" data-number="2.2.2">
 <h3 data-number="2.2.2" class="anchored" data-anchor-id="pairs-plots."><span class="header-section-number">2.2.2</span> Pairs-plots.</h3>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb13"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>      column-names cols-of-interest]</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">:repeat</span> {<span class="at">:column</span> column-names</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">:row</span>    column-names}</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">:spec</span>   {<span class="at">:height</span>   <span class="dv">100</span> <span class="at">:width</span> <span class="dv">100</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">:mark</span>     <span class="st">"circle"</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">:encoding</span> {<span class="at">:x</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">:y</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"row"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}}}})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      column-names cols-of-interest]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">:repeat</span> {<span class="at">:column</span> column-names</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">:row</span>    column-names}</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>   <span class="at">:spec</span>   {<span class="at">:height</span>   <span class="dv">100</span> <span class="at">:width</span> <span class="dv">100</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">:mark</span>     <span class="st">"circle"</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">:encoding</span> {<span class="at">:x</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">:y</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"row"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}}}})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="max-height:600px;overflow-y:auto;">
 <div>
@@ -785,64 +776,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb14"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [combos (combo/combinations cols-of-interest <span class="dv">2</span>)]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [[x y] combos]</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} [x y] (stats/correlation (<span class="kw">get</span> liver-disease x) (<span class="kw">get</span> liver-disease y)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [combos (combo/combinations cols-of-interest <span class="dv">2</span>)]</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [[x y] combos]</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} [x y] (stats/correlation (<span class="kw">get</span> liver-disease x) (<span class="kw">get</span> liver-disease y)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
-<div class="sourceCode" id="cb15"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>({[<span class="at">:mcv</span> <span class="at">:alkphos</span>] <span class="fl">0.04410299969572895</span>}</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:sgpt</span>] <span class="fl">0.14769504803185451</span>}</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:sgot</span>] <span class="fl">0.1877651531698029</span>}</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:gammagt</span>] <span class="fl">0.2223144936927525</span>}</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:drinks</span>] <span class="fl">0.3126795966511246</span>}</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:sgpt</span>] <span class="fl">0.07620760528013328</span>}</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:sgot</span>] <span class="fl">0.1460565465048546</span>}</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:gammagt</span>] <span class="fl">0.13314039838436367</span>}</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:drinks</span>] <span class="fl">0.10079605839698665</span>}</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:sgot</span>] <span class="fl">0.7396748677149187</span>}</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:gammagt</span>] <span class="fl">0.5034352544029691</span>}</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:drinks</span>] <span class="fl">0.20684793492452233</span>}</span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:gammagt</span>] <span class="fl">0.5276259280455446</span>}</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:drinks</span>] <span class="fl">0.2795877736826015</span>}</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:gammagt</span> <span class="at">:drinks</span>] <span class="fl">0.3412239586693896</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>({[<span class="at">:mcv</span> <span class="at">:alkphos</span>] <span class="fl">0.04410299969572895</span>}</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:sgpt</span>] <span class="fl">0.14769504803185451</span>}</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:sgot</span>] <span class="fl">0.1877651531698029</span>}</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:gammagt</span>] <span class="fl">0.2223144936927525</span>}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:mcv</span> <span class="at">:drinks</span>] <span class="fl">0.3126795966511246</span>}</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:sgpt</span>] <span class="fl">0.07620760528013328</span>}</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:sgot</span>] <span class="fl">0.1460565465048546</span>}</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:gammagt</span>] <span class="fl">0.13314039838436367</span>}</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:drinks</span>] <span class="fl">0.10079605839698665</span>}</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:sgot</span>] <span class="fl">0.7396748677149187</span>}</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:gammagt</span>] <span class="fl">0.5034352544029691</span>}</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:drinks</span>] <span class="fl">0.20684793492452233</span>}</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:gammagt</span>] <span class="fl">0.5276259280455446</span>}</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:drinks</span>] <span class="fl">0.2795877736826015</span>}</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:gammagt</span> <span class="at">:drinks</span>] <span class="fl">0.3412239586693896</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see pearson correlation between each pair of variables of interest. Correlations closer to |1| represent variables that have strong relationship to each other. For example, Looking at both the pairs-plot and the correlations, we see <code>:sgpt</code> <code>:sgot</code> are the most related variables and are related in the positive direction. Below we focus on the correlation of regressors on the response <em>only</em>.</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb16"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [combos (combo/combinations cols-of-interest <span class="dv">2</span>)]</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [[x y] combos</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">:when</span> (<span class="kw">or</span> (<span class="kw">=</span> <span class="at">:drinks</span> x) (<span class="kw">=</span> <span class="at">:drinks</span> y))]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} [x y] (stats/correlation (<span class="kw">get</span> liver-disease x) (<span class="kw">get</span> liver-disease y)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [combos (combo/combinations cols-of-interest <span class="dv">2</span>)]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [[x y] combos</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">:when</span> (<span class="kw">or</span> (<span class="kw">=</span> <span class="at">:drinks</span> x) (<span class="kw">=</span> <span class="at">:drinks</span> y))]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} [x y] (stats/correlation (<span class="kw">get</span> liver-disease x) (<span class="kw">get</span> liver-disease y)))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
-<div class="sourceCode" id="cb17"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>({[<span class="at">:mcv</span> <span class="at">:drinks</span>] <span class="fl">0.3126795966511246</span>}</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:drinks</span>] <span class="fl">0.10079605839698665</span>}</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:drinks</span>] <span class="fl">0.20684793492452233</span>}</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:drinks</span>] <span class="fl">0.2795877736826015</span>}</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:gammagt</span> <span class="at">:drinks</span>] <span class="fl">0.3412239586693896</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>({[<span class="at">:mcv</span> <span class="at">:drinks</span>] <span class="fl">0.3126795966511246</span>}</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:alkphos</span> <span class="at">:drinks</span>] <span class="fl">0.10079605839698665</span>}</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgpt</span> <span class="at">:drinks</span>] <span class="fl">0.20684793492452233</span>}</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:sgot</span> <span class="at">:drinks</span>] <span class="fl">0.2795877736826015</span>}</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a> {[<span class="at">:gammagt</span> <span class="at">:drinks</span>] <span class="fl">0.3412239586693896</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb18"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span>                                                    <span class="co">;another way to make histograms for diagonals</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>        column-names cols-of-interest]</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">:repeat</span> {<span class="at">:column</span> column-names}</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">:spec</span>   {<span class="at">:mark</span>     <span class="st">"bar"</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">:encoding</span> {<span class="at">:x</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span>}</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">:y</span> {<span class="at">:aggregate</span> <span class="st">"count"</span>}}}})</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  (stats/correlation-matrix (ds/columns liver-disease) <span class="at">:spearman</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span>                                                    <span class="co">;another way to make histograms for diagonals</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>        column-names cols-of-interest]</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">:repeat</span> {<span class="at">:column</span> column-names}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">:spec</span>   {<span class="at">:mark</span>     <span class="st">"bar"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">:encoding</span> {<span class="at">:x</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span>}</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">:y</span> {<span class="at">:aggregate</span> <span class="st">"count"</span>}}}})</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  (stats/correlation-matrix (ds/columns liver-disease) <span class="at">:spearman</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="box-plots." class="level3" data-number="2.2.3">
 <h3 data-number="2.2.3" class="anchored" data-anchor-id="box-plots."><span class="header-section-number">2.2.3</span> Box-plots.</h3>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb19"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      column-names (<span class="kw">remove</span> #{<span class="at">:selector</span>} (ds/column-names liver-disease))]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">:repeat</span> {<span class="at">:column</span> column-names}</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">:spec</span>   {<span class="at">:width</span>    <span class="dv">60</span> <span class="at">:mark</span> <span class="st">"boxplot"</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">:encoding</span> {<span class="at">:y</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}}}})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>^kind/vega</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [data (ds/rows liver-disease <span class="at">:as-maps</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>      column-names (<span class="kw">remove</span> #{<span class="at">:selector</span>} (ds/column-names liver-disease))]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  {<span class="at">:data</span>   {<span class="at">:values</span> data}</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">:repeat</span> {<span class="at">:column</span> column-names}</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>   <span class="at">:spec</span>   {<span class="at">:width</span>    <span class="dv">60</span> <span class="at">:mark</span> <span class="st">"boxplot"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">:encoding</span> {<span class="at">:y</span> {<span class="at">:field</span> {<span class="at">:repeat</span> <span class="st">"column"</span>} <span class="at">:type</span> <span class="st">"quantitative"</span> <span class="at">:scale</span> {<span class="at">:zero</span> <span class="va">false</span>}}}}})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="max-height:600px;overflow-y:auto;">
 <div>
@@ -851,20 +842,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Looking at the box-plots, the circle points are outliers, viz.&nbsp;points outside Q1 - 1.5<em>IQR or Q3 + 1.5</em>IQR. Below we count the number of outliers per column.</p>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb20"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [columns cols-of-interest]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [column columns]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} column (<span class="kw">count</span> (stats/outliers (<span class="kw">get</span> liver-disease column))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">let</span> [columns cols-of-interest]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [column columns]</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">assoc</span> {} column (<span class="kw">count</span> (stats/outliers (<span class="kw">get</span> liver-disease column))))))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="printedClojure">
-<div class="sourceCode" id="cb21"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>({<span class="at">:mcv</span> <span class="dv">2</span>} {<span class="at">:alkphos</span> <span class="dv">9</span>} {<span class="at">:sgpt</span> <span class="dv">28</span>} {<span class="at">:sgot</span> <span class="dv">24</span>} {<span class="at">:gammagt</span> <span class="dv">27</span>} {<span class="at">:drinks</span> <span class="dv">5</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>({<span class="at">:mcv</span> <span class="dv">2</span>} {<span class="at">:alkphos</span> <span class="dv">9</span>} {<span class="at">:sgpt</span> <span class="dv">28</span>} {<span class="at">:sgot</span> <span class="dv">24</span>} {<span class="at">:gammagt</span> <span class="dv">27</span>} {<span class="at">:drinks</span> <span class="dv">5</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="sourceClojure">
-<div class="sourceCode" id="cb22"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">; created permutation of columns of interest. Wanted combinations, below</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [x cols-of-interest</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        y (<span class="kw">rest</span> cols-of-interest)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">:when</span> (<span class="kw">not=</span> x y)]</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    [x y]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">comment</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">; created permutation of columns of interest. Wanted combinations, below</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">for</span> [x cols-of-interest</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        y (<span class="kw">rest</span> cols-of-interest)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">:when</span> (<span class="kw">not=</span> x y)]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    [x y]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div style="background-color:grey;height:2px;width:100%;">
 
@@ -1114,7 +1105,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CS7200_SP2024_A01_Salvo</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Assignment 1: Linear Regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

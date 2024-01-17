@@ -1,0 +1,6 @@
+.cpcache/
+.idea/
+classes/
+.nrepl-port
+linear-regression.iml
+*.qmd

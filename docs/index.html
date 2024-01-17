@@ -96,8 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <link rel="icon" href="data:,">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -110,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CS7200_SP2024_A01_Salvo</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Assignment 1: Linear Regression</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -138,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CS7200_SP2024_A01_Salvo</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Assignment 1: Linear Regression</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -175,26 +173,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#cs7200_sp2024_a01_salvo" id="toc-cs7200_sp2024_a01_salvo" class="nav-link active" data-scroll-target="#cs7200_sp2024_a01_salvo"><span class="header-section-number">1</span> CS7200_SP2024_A01_Salvo</a>
-  <ul>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">1.1</span> Summary</a>
-  <ul class="collapse">
-  <li><a href="#ridge" id="toc-ridge" class="nav-link" data-scroll-target="#ridge"><span class="header-section-number">1.1.1</span> Ridge</a></li>
-  <li><a href="#lasso" id="toc-lasso" class="nav-link" data-scroll-target="#lasso"><span class="header-section-number">1.1.2</span> Lasso</a></li>
-  <li><a href="#elastic-net" id="toc-elastic-net" class="nav-link" data-scroll-target="#elastic-net"><span class="header-section-number">1.1.3</span> Elastic Net</a>
-  <ul class="collapse">
-  <li><a href="#note-on-textloss-function" id="toc-note-on-textloss-function" class="nav-link" data-scroll-target="#note-on-textloss-function"><span class="header-section-number">1.1.3.1</span> Note on <span class="math inline">\(\text{Loss Function}\)</span></a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">1.2</span> Results</a></li>
-  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="header-section-number">1.3</span> Reflection</a>
-  <ul class="collapse">
-  <li><a href="#some-depth-comes-from-function-implementation." id="toc-some-depth-comes-from-function-implementation." class="nav-link" data-scroll-target="#some-depth-comes-from-function-implementation."><span class="header-section-number">1.3.0.1</span> Some depth comes from function implementation.</a></li>
-  <li><a href="#some-depth-comes-from-needing-customization." id="toc-some-depth-comes-from-needing-customization." class="nav-link" data-scroll-target="#some-depth-comes-from-needing-customization."><span class="header-section-number">1.3.0.2</span> Some depth comes from needing customization.</a></li>
-  <li><a href="#some-depth-comes-from-getting-the-language-to-do-what-i-want-it-to-do." id="toc-some-depth-comes-from-getting-the-language-to-do-what-i-want-it-to-do." class="nav-link" data-scroll-target="#some-depth-comes-from-getting-the-language-to-do-what-i-want-it-to-do."><span class="header-section-number">1.3.0.3</span> Some depth comes from getting the language to do what I want it to do.</a></li>
-  <li><a href="#some-depth-comes-from-doing-things-youve-never-done-before." id="toc-some-depth-comes-from-doing-things-youve-never-done-before." class="nav-link" data-scroll-target="#some-depth-comes-from-doing-things-youve-never-done-before."><span class="header-section-number">1.3.0.4</span> Some depth comes from doing things you’ve never done before.</a></li>
-  </ul></li>
-  </ul></li>
+  <li><a href="#assignment-1-linear-regression" id="toc-assignment-1-linear-regression" class="nav-link active" data-scroll-target="#assignment-1-linear-regression"><span class="header-section-number">1</span> Assignment 1: Linear Regression</a></li>
   </ul>
 </nav>
     </div>
@@ -229,260 +208,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceClojure">
 <div class="sourceCode" id="cb1"><pre class="sourceCode clojure code-with-copy"><code class="sourceCode clojure"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>(<span class="kw">ns</span> <span class="kw">index</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="cs7200_sp2024_a01_salvo" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> CS7200_SP2024_A01_Salvo</h1>
-<p>The descriptions below reference the HTMLs in the <code>docs/</code> folder. Please download the <code>docs/</code> folder and open any HTML file. All HTMLs are internally linked to one another. The corresponding code (one per chapter) are in <code>src/assignment/</code>. In later assignments, I will be able to deploy my Clojure code and have it build to a static HTML site. Unfortunately, I wasn’t able to do that this time.</p>
-<section id="summary" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.1</span> Summary</h2>
-<p>This assignment implemented three popular regularization techniques in regression: ridge, lasso, and elastic net, on a <a href="https://archive.ics.uci.edu/dataset/60/liver+disorders">liver disorder dataset</a> found on UCI’s machine learning repository. The purpose of these regularization techniques is to prevent overfitting in machine learning models, especially in cases with many features. They work by adding a penalty term to the loss function of the model, discouraging the model from assigning too much importance to any one feature. Mathematically, the penalty terms can be written as:</p>
-<section id="ridge" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="ridge"><span class="header-section-number">1.1.1</span> Ridge</h3>
-<p><span class="math display">\[\text{Ridge Penalty} = \text{Loss Function} + \lambda \sum_{i=1}^{p} (\beta_i)^2\]</span></p>
-<p>Ridge regression adds a penalty equivalent to the square of the coefficients. The penalty term is controlled by a tuning parameter, lambda (<span class="math inline">\(λ\)</span>). Ridge regression is also called “L2 regularization technique.” Because of this L2, we may see a ridge regression lambda written as <span class="math inline">\(\lambda_2\)</span>.</p>
-<p>In this technique, no feature is eliminated. Rather, coefficients “shrink” towards zero.</p>
-</section>
-<section id="lasso" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="lasso"><span class="header-section-number">1.1.2</span> Lasso</h3>
-<p><span class="math display">\[\text{Lasso Penalty} = \text{Loss Function} + \lambda \sum_{i=1}^{p} |\beta_i|\]</span></p>
-<p>Lasso regression also adds a penalty term to the loss function. However, here, it’s the absolute value of the coefficients. Lasso regression is also called “L1 regularization technique.” Because of this L1, we may see a lasso regression lambda written as <span class="math inline">\(\lambda_1\)</span>.</p>
-<p>This technique allows for poorly performing features to be eliminated from the model.</p>
-</section>
-<section id="elastic-net" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="elastic-net"><span class="header-section-number">1.1.3</span> Elastic Net</h3>
-<p><span class="math display">\[\text{Elastic Net Penalty} = \text{Loss Function} + \lambda_1 \sum_{i=1}^{p} |\beta_i| + \lambda_2 \sum_{i=1}^{p} (\beta_i)^2\]</span></p>
-<p>Elastic Net is a combination of Ridge and Lasso regressions. It includes both L1 and L2 penalties. No feature is eliminated.</p>
-<section id="note-on-textloss-function" class="level4" data-number="1.1.3.1">
-<h4 data-number="1.1.3.1" class="anchored" data-anchor-id="note-on-textloss-function"><span class="header-section-number">1.1.3.1</span> Note on <span class="math inline">\(\text{Loss Function}\)</span></h4>
-<p>In most regression models I’ve work with, the <span class="math inline">\(\text{Loss Function}\)</span> is the <span class="math inline">\(\text{Residual Sum of Squares}\)</span> (<span class="math inline">\(RSS\)</span>).</p>
-<p><span class="math display">\[\text{RSS} = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2\]</span></p>
-</section>
-</section>
-</section>
-<section id="results" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="results"><span class="header-section-number">1.2</span> Results</h2>
-<p>We were asked to test two implementations of the same algorithm. I ran Java’s Smile in scicloj.clj and Python’s Scikit Learn in sklearn.clj. Below are the two main tables produced in scicloj.clj and sklearn.clj:</p>
-<table class="table">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 14%">
-<col style="width: 9%">
-<col style="width: 11%">
-<col style="width: 11%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 9%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>:model-type</th>
-<th style="text-align: right;">:compute-time-ns</th>
-<th style="text-align: right;">:alpha</th>
-<th style="text-align: right;">:lambda1</th>
-<th style="text-align: right;">:lambda2</th>
-<th style="text-align: right;">:adj-r2</th>
-<th style="text-align: right;">:mae</th>
-<th style="text-align: right;">:rmse</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>:smile.regression/ridge</td>
-<td style="text-align: right;">691179</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">196.78714859</td>
-<td style="text-align: right;">0.27138367</td>
-<td style="text-align: right;">2.19656820</td>
-<td style="text-align: right;">2.88244828</td>
-</tr>
-<tr class="even">
-<td>:smile.regression/ridge</td>
-<td style="text-align: right;">644802</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">192.77108434</td>
-<td style="text-align: right;">0.27131830</td>
-<td style="text-align: right;">2.19552025</td>
-<td style="text-align: right;">2.88102276</td>
-</tr>
-<tr class="odd">
-<td>:smile.regression/ridge</td>
-<td style="text-align: right;">843926</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">188.75502008</td>
-<td style="text-align: right;">0.27124938</td>
-<td style="text-align: right;">2.19445469</td>
-<td style="text-align: right;">2.87959384</td>
-</tr>
-<tr class="even">
-<td>:smile.regression/lasso</td>
-<td style="text-align: right;">1401088</td>
-<td style="text-align: right;">1.00000000</td>
-<td style="text-align: right;">4.01606426</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.26141892</td>
-<td style="text-align: right;">2.73072125</td>
-<td style="text-align: right;">3.40320579</td>
-</tr>
-<tr class="odd">
-<td>:smile.regression/elastic-net</td>
-<td style="text-align: right;">1581917</td>
-<td style="text-align: right;">0.62499984</td>
-<td style="text-align: right;">100.00000000</td>
-<td style="text-align: right;">60.00004000</td>
-<td style="text-align: right;">0.26059398</td>
-<td style="text-align: right;">2.22496112</td>
-<td style="text-align: right;">2.92246056</td>
-</tr>
-<tr class="even">
-<td>:smile.regression/elastic-net</td>
-<td style="text-align: right;">1193860</td>
-<td style="text-align: right;">0.65217371</td>
-<td style="text-align: right;">100.00000000</td>
-<td style="text-align: right;">53.33338000</td>
-<td style="text-align: right;">0.26021738</td>
-<td style="text-align: right;">2.22204401</td>
-<td style="text-align: right;">2.91718016</td>
-</tr>
-<tr class="odd">
-<td>:smile.regression/lasso</td>
-<td style="text-align: right;">1240533</td>
-<td style="text-align: right;">1.00000000</td>
-<td style="text-align: right;">8.03212851</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.25986847</td>
-<td style="text-align: right;">2.73272023</td>
-<td style="text-align: right;">3.40683967</td>
-</tr>
-<tr class="even">
-<td>:smile.regression/elastic-net</td>
-<td style="text-align: right;">1592694</td>
-<td style="text-align: right;">0.68181793</td>
-<td style="text-align: right;">100.00000000</td>
-<td style="text-align: right;">46.66672000</td>
-<td style="text-align: right;">0.25984550</td>
-<td style="text-align: right;">2.21890789</td>
-<td style="text-align: right;">2.91171010</td>
-</tr>
-<tr class="odd">
-<td>:smile.regression/lasso</td>
-<td style="text-align: right;">1372893</td>
-<td style="text-align: right;">1.00000000</td>
-<td style="text-align: right;">12.04819277</td>
-<td style="text-align: right;">0.00000000</td>
-<td style="text-align: right;">0.25806319</td>
-<td style="text-align: right;">2.73472124</td>
-<td style="text-align: right;">3.41060937</td>
-</tr>
-</tbody>
-</table>
-<table class="table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 18%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>:model-type</th>
-<th style="text-align: right;">:compute-time-ns</th>
-<th style="text-align: right;">:alpha</th>
-<th style="text-align: right;">:adj-r2</th>
-<th style="text-align: right;">:mae</th>
-<th style="text-align: right;">:rmse</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>:sklearn.regression/elastic-net</td>
-<td style="text-align: right;">4081852</td>
-<td style="text-align: right;">0.98393574</td>
-<td style="text-align: right;">0.26161668</td>
-<td style="text-align: right;">2.30607905</td>
-<td style="text-align: right;">3.04582307</td>
-</tr>
-<tr class="even">
-<td>:sklearn.regression/elastic-net</td>
-<td style="text-align: right;">4460882</td>
-<td style="text-align: right;">0.98795181</td>
-<td style="text-align: right;">0.26159480</td>
-<td style="text-align: right;">2.30679512</td>
-<td style="text-align: right;">3.04693277</td>
-</tr>
-<tr class="odd">
-<td>:sklearn.regression/elastic-net</td>
-<td style="text-align: right;">4107027</td>
-<td style="text-align: right;">0.99196787</td>
-<td style="text-align: right;">0.26157229</td>
-<td style="text-align: right;">2.30750974</td>
-<td style="text-align: right;">3.04804261</td>
-</tr>
-<tr class="even">
-<td>:sklearn.regression/elastic-net</td>
-<td style="text-align: right;">3735449</td>
-<td style="text-align: right;">0.99598394</td>
-<td style="text-align: right;">0.26154913</td>
-<td style="text-align: right;">2.30822291</td>
-<td style="text-align: right;">3.04915259</td>
-</tr>
-<tr class="odd">
-<td>:sklearn.regression/elastic-net</td>
-<td style="text-align: right;">4909871</td>
-<td style="text-align: right;">1.00000000</td>
-<td style="text-align: right;">0.26152532</td>
-<td style="text-align: right;">2.30893464</td>
-<td style="text-align: right;">3.05026269</td>
-</tr>
-</tbody>
-</table>
-<p>In terms of the goodness-of-fit measures, both implementations perform similarly. The main difference is between compute times. Scikit Learn’s implementation takes over twice the time as Smile’s. Choosing a best model, I’d pick Smile’s ridge regression with a lambda of 196.78714859. It has the benefit of fastest computational time and best Adjusted R<span class="math inline">\(^2\)</span>. The model coefficients are as follows:</p>
-</section>
-<section id="reflection" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">1.3</span> Reflection</h2>
-<p>I like to believe I understand linear regression at an advanced level. This assignment reminds me how deep simple things can be.</p>
-<section id="some-depth-comes-from-function-implementation." class="level4" data-number="1.3.0.1">
-<h4 data-number="1.3.0.1" class="anchored" data-anchor-id="some-depth-comes-from-function-implementation."><span class="header-section-number">1.3.0.1</span> Some depth comes from function implementation.</h4>
-<p>Many, maybe most elastic net functions will take two tuning parameters, alpha and lambda ratio. See Python’s ElasticNet implementation <a href="https://ibex.readthedocs.io/en/latest/api_ibex_sklearn_linear_model_elasticnet.html">documentation</a>, for example. I’m migrating from R to Clojure. Many of Clojure’s machine learning algorithms use Java’s Smile library. Smile’s implementation of elastic-net takes in a lambda1 and lambda2. See <a href="https://haifengl.github.io/api/java/smile/regression/ElasticNet.html">documentation</a>. It also doesn’t allow you to have either lambda be 0. If you want <span class="math inline">\(lambda1 = 0\)</span>, Clojure throws an errors saying, in effect, “Why don’t you do a Ridge Regression?” So instead of bundling everything in an elastic net, I had to separate out the three–ridge, lasso, and elastic net.</p>
-<p>The next question is; How does lambda1 and lambda2 relate to alpha? I couldn’t find a direct answer, so instead, I used a hacky ratio found near the bottom of page 4 in <a href="https://hastie.su.domains/Papers/elasticnet.pdf">this paper</a>. Is this hacky alpha the same alpha Python uses? NO! Nevertheless, he persisted.</p>
-</section>
-<section id="some-depth-comes-from-needing-customization." class="level4" data-number="1.3.0.2">
-<h4 data-number="1.3.0.2" class="anchored" data-anchor-id="some-depth-comes-from-needing-customization."><span class="header-section-number">1.3.0.2</span> Some depth comes from needing customization.</h4>
-<p>In this assignment, we needed to measure computation time. In Clojure, there is a function called <code>time</code>. When evaluating a pipeline, there is an option that allows us to use a function as an evaluation metric. Great. Let me add the <code>time</code> function to :other-metrics. It didn’t work. “A macro(!) can’t be used as an evaluation metric.” Who knew?</p>
-<p>Lo and behold, deep in the <a href="https://github.com/scicloj/metamorph.ml/blob/main/src/scicloj/metamorph/ml.clj#L98">docs</a> and deep in the object structure was collected compute time. Great. I call it and see values of 0 to 2 per model. I discovered that <code>(System/currentTimeMillis)</code> returns integers only. Not granular enough. Looking at the function in the doc, notice it’s a private function. How do I update that tiny private function in a huge namespace? I’m not going to fork it for a single use case. Turns out I had to write a patch file. That was new for me.</p>
-</section>
-<section id="some-depth-comes-from-getting-the-language-to-do-what-i-want-it-to-do." class="level4" data-number="1.3.0.3">
-<h4 data-number="1.3.0.3" class="anchored" data-anchor-id="some-depth-comes-from-getting-the-language-to-do-what-i-want-it-to-do."><span class="header-section-number">1.3.0.3</span> Some depth comes from getting the language to do what I want it to do.</h4>
-<p>Last, the section “Extract evaluation metrics from the best models” took me a lot of time. Before writing functions, I tried defining variables and reworking the variable to get it into the structure I wanted it. In Clojure, datasets are maps such that the keys//value pair correspond to column name//vector of values. So the table below is represented as {:a [1 2] :b [3 4] :c [5 6]}.</p>
-<table class="table">
-<thead>
-<tr class="header">
-<th>:a</th>
-<th style="text-align: right;">:b</th>
-<th style="text-align: right;">:c</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">5</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">6</td>
-</tr>
-</tbody>
-</table>
-<p>It’s not very easy to add a row, for example. You have to match keys and conjoining vectors. Easier said than done. I think of these data structures having mobility maps, think the Vitruvian Man by Leonardo da Vinci. Man can touch things above, below, behind, in front, all kinds of directions. Think about a dog. Put a treat between its shoulders. It can’t reach with its paws, its head can’t turn that far; its mobility is limited. When I was working with these datasets, I felt similarly. With time comes comfort.</p>
-</section>
-<section id="some-depth-comes-from-doing-things-youve-never-done-before." class="level4" data-number="1.3.0.4">
-<h4 data-number="1.3.0.4" class="anchored" data-anchor-id="some-depth-comes-from-doing-things-youve-never-done-before."><span class="header-section-number">1.3.0.4</span> Some depth comes from doing things you’ve never done before.</h4>
-<p>Lastly, I worked hard to get the results published on GitLab pages (or GitHub pages). I set up my project such that I thought I could use a build function I made in <code>env/dev/src/dev.clj</code> to build and push the results (the folder <code>docs/</code>) to the <code>gh-pages</code> branch of a repository. I believe my setup is correct, but figuring out how to use GitHub Actions properly, is where I am still failing. I hope later in the semester I will have this well understood.</p>
+<section id="assignment-1-linear-regression" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Assignment 1: Linear Regression</h1>
+<p>Instructions:</p>
+<ul>
+<li>Select a suitable dataset from the <a href="http://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></li>
+<li>Scale, normalize, and/or encode your data appropriately.</li>
+<li>Implement the Multivariate Linear Regression.</li>
+<li>Compare the performance of your implementation in terms of computation time and other appropriate metrics using 5-fold Cross Validation.</li>
+<li>Modify the “README.md” file to include the following sections:</li>
+<li>Summary: A one paragraph summary of the algorithm that was implemented including any pertinent or useful information. If mathematics are appropriate, include those as well.</li>
+<li>Results: Display the comparative analysis of your implementation and the benchmark implementation in terms of computation time and other metrics. Which algorithm performed better? Why do you think this is the case?</li>
+<li>Reflection: One paragraph describing useful takeaways from the week, things that surprised you, or things that caused you inordinate difficulty.</li>
+<li>Make sure that your README file is formatted properly and is visually appealing. It should be free of grammatical errors, punctuation errors, capitalization issues, etc.</li>
+</ul>
+<p>What I did:</p>
+<ul>
+<li>Selected <a href="https://archive.ics.uci.edu/dataset/60/liver+disorders">Liver Disorders</a>. Interesting dataset that has been <a href="https://www-sciencedirect-com.ezproxy.bgsu.edu/science/article/pii/S0167865516000088">misunderstood</a> in most publications.</li>
+<li>Scaled all regressors and removed an indicator column called <code>:selector</code>.</li>
+<li>Implemented three popular regularization techniques–ridge, lasso, and elastic net regression.</li>
+<li>Compared Clojure’s native Scicloj machine learning <a href="https://github.com/scicloj/scicloj.ml">library</a> that leverages Java’s Smile machine learning <a href="https://haifengl.github.io/">library</a> against Clojure’s implementation of Python’s <a href="https://scikit-learn.org/stable/">Scikit Learn</a> algorithm library using sklearn-clj <a href="https://github.com/scicloj/sklearn-clj">library</a>.</li>
+</ul>
 <div style="background-color:grey;height:2px;width:100%;">
 
 </div>
@@ -491,8 +237,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->
