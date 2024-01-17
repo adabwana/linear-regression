@@ -1,8 +1,7 @@
 (ns assignment.scicloj
   (:require
     [assignment.eda :refer [liver-disease]]
-    [calc-metric.patch] ;eval from milliseconds to nanoseconds
-    [nextjournal.clerk :as clerk]
+    [calc-metric.patch]                                     ;eval from milliseconds to nanoseconds
     [scicloj.ml.core :as ml]
     [scicloj.ml.dataset :as ds]
     [scicloj.ml.metamorph :as mm]
@@ -106,11 +105,8 @@
       reverse))
 
 ;; ## Best model for each pipeline
-^{::clerk/viewer clerk/code}
 (-> models-ridge-val first :summary)
-^{::clerk/viewer clerk/code}
 (-> models-lasso-val first :summary)
-^{::clerk/viewer clerk/code}
 (-> models-enet-val first :summary)
 
 ; The summary for our best lasso model looks wrong. A negative Adjusted R$2$? We can see an issue derives from not calculating the Adjusted R$^2$, i.e the `:metric`.
