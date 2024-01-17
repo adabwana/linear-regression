@@ -13,7 +13,7 @@
          (ds/dataset "data/bupa.csv"
                      {:key-fn (fn [colname]
                                 (-> colname
-                                    (clojure.string/replace ##"\.|\s" "-")
+                                    (clojure.string/replace #"\.|\s" "-")
                                     clojure.string/lower-case
                                     keyword))}))
 
@@ -77,7 +77,7 @@
   (for [[x y] combos]
     (assoc {} [x y] (stats/correlation (get liver-disease x) (get liver-disease y)))))
 
-; We can see pearson correlation between each pair of variables of interest. Correlations closer to |1| represent variables that have strong relationship to each other. For example, Looking at both the pairs-plot and the correlations, we see `:sgpt` `:sgot` are the most related variables and are related in the positive direction. Below we focus on the correlation of regressors on the response *only*.
+; We can see pearson correlation between each pair of variables of interest. Correlations closer to |1| represent variables that have a strong relationship to each other. For example, Looking at both the pairs-plot and the correlations, we see `:sgpt` `:sgot` are the most related variables and are related in the positive direction. Below we focus on the correlation of regressors on the response *only*.
 
 (let [combos (combo/combinations cols-of-interest 2)]
   (for [[x y] combos
