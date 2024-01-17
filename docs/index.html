@@ -215,11 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Select a suitable dataset from the <a href="http://archive.ics.uci.edu/ml/index.php">UCI Machine Learning Repository</a></li>
 <li>Scale, normalize, and/or encode your data appropriately.</li>
 <li>Implement the Multivariate Linear Regression.</li>
-<li>Compare the performance of your implementation in terms of computation time and other appropriate metrics using 5-fold Cross Validation.</li>
-<li>Modify the “README.md” file to include the following sections:</li>
-<li>Summary: A one paragraph summary of the algorithm that was implemented including any pertinent or useful information. If mathematics are appropriate, include those as well.</li>
-<li>Results: Display the comparative analysis of your implementation and the benchmark implementation in terms of computation time and other metrics. Which algorithm performed better? Why do you think this is the case?</li>
-<li>Reflection: One paragraph describing useful takeaways from the week, things that surprised you, or things that caused you inordinate difficulty.</li>
+<li>Compare the performance of your implementation in terms of computation time and other appropriate metrics using 5-fold Cross Validation using a variety of Alpha values.</li>
+<li>Modify the “README.md” file to include the following sections:<br> &nbsp;&nbsp;&nbsp;&nbsp;* <strong>Summary</strong>: A one-paragraph summary of the algorithm that was implemented including any pertinent or useful information. If mathematics are appropriate, include those as well.<br> &nbsp;&nbsp;&nbsp;&nbsp;* <strong>Results</strong>: Display the comparative analysis of your implementation and the benchmark implementation in terms of computation time and other metrics. Which algorithm performed better? Why do you think this is the case?<br> &nbsp;&nbsp;&nbsp;&nbsp;* <strong>Reflection</strong>: One paragraph describing useful takeaways from the week, things that surprised you, or things that caused you inordinate difficulty.</li>
 <li>Make sure that your README file is formatted properly and is visually appealing. It should be free of grammatical errors, punctuation errors, capitalization issues, etc.</li>
 </ul>
 <p>What I did:</p>
@@ -227,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Selected <a href="https://archive.ics.uci.edu/dataset/60/liver+disorders">Liver Disorders</a>. Interesting dataset that has been <a href="https://www-sciencedirect-com.ezproxy.bgsu.edu/science/article/pii/S0167865516000088">misunderstood</a> in most publications.</li>
 <li>Scaled all regressors and removed an indicator column called <code>:selector</code>.</li>
 <li>Implemented three popular regularization techniques–ridge, lasso, and elastic net regression.</li>
-<li>Compared Clojure’s native Scicloj machine learning <a href="https://github.com/scicloj/scicloj.ml">library</a> that leverages Java’s Smile machine learning <a href="https://haifengl.github.io/">library</a> against Clojure’s implementation of Python’s <a href="https://scikit-learn.org/stable/">Scikit Learn</a> algorithm library using sklearn-clj <a href="https://github.com/scicloj/sklearn-clj">library</a>.</li>
+<li>Compared Clojure’s native Scicloj machine learning <a href="https://github.com/scicloj/scicloj.ml">library</a> that leverages Java’s Smile machine learning <a href="https://haifengl.github.io/">library</a> (no alpha parameter, so I used lambda1 and lambda2) against Clojure’s implementation of Python’s <a href="https://scikit-learn.org/stable/">Scikit Learn</a> library (does have alpha values I configured) using sklearn-clj <a href="https://github.com/scicloj/sklearn-clj">library</a>.</li>
 </ul>
 <div style="background-color:grey;height:2px;width:100%;">
 
